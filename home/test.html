@@ -1,0 +1,24 @@
+<?php
+
+
+    function testone(){
+
+        // Example array
+        $credentials = array(
+            'amount_range' => "Minimum",
+            'holiday' => "No",
+            'return_interest' => "% (Daily)",
+            'number_period' =>" Times" ,
+            'capital_back' => "hert",
+        );
+
+        // Remove 'holiday' element from $credentials array
+        unset($credentials['holiday']);
+
+        // Output the updated $credentials array
+        print_r($credentials);
+    }
+
+     testone();
+
+?>

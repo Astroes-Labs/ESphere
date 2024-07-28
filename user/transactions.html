@@ -1,0 +1,424 @@
+<?php 
+    $endpoint = '../vendor/php/view.php'; 
+    include_once $endpoint; 
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="3Hb4beEaVqFusynfhpb2vPyJoshoYMSyJjPiApgC">
+    <meta name="keywords" content="<?php echo WEBSITE_NAME; ?>">
+    <meta name="description" content="<?php echo WEBSITE_NAME; ?>">
+    <link rel="canonical" href="../user/transactions" />
+    <link rel="shortcut icon" href="../assets/global/images/8asAPVg73gU9Kr32Z2dv.png" type="image/x-icon" />
+
+    <link rel="icon" href="../assets/global/images/8asAPVg73gU9Kr32Z2dv.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../assets/global/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="../assets/frontend/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/frontend/css/animate.css" />
+    <link rel="stylesheet" href="../assets/frontend/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="../assets/global/css/nice-select.css" />
+    <link rel="stylesheet" href="../assets/global/css/datatables.min.css" />
+    <link rel="stylesheet" href="../assets/global/css/simple-notify.min.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/vendor/mckenziearts/laravel-notify/css/notify.css" />
+    <link rel="stylesheet" href="../assets/global/css/custom.css" />
+    <link rel="stylesheet" href="../assets/frontend/css/magnific-popup.css" />
+    <link rel="stylesheet" href="../assets/frontend/css/styles.css?var=2.1" />
+
+    <style>
+        //The Custom CSS will be added on the site head tag 
+        .site-head-tag {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+    <title>
+        <?php echo WEBSITE_NAME; ?> - Schema Logs
+    </title>
+
+
+</head>
+
+<body class="dark-theme">
+    <script>
+        var notify = {
+            timeout: "5000",
+        }
+    </script>
+    <!--Full Layout-->
+    <div class="panel-layout">
+        <!--Header-->
+        <div class="panel-header">
+            <div class="logo">
+                <a href="..">
+                    <img class="logo-unfold" src="../assets/global/images/fQqFMZn3e0VAvI05KvFR.png" alt="Logo" />
+                    <img class="logo-fold" src="../assets/global/images/fQqFMZn3e0VAvI05KvFR.png" alt="Logo" />
+                </a>
+            </div>
+            <div class="nav-wrap">
+                <div class="nav-left">
+                    <button class="sidebar-toggle">
+                        <i class="anticon anticon-arrow-left"></i>
+                    </button>
+                    <div class="mob-logo">
+                        <a href="..">
+                            <img src="../assets/global/images/fQqFMZn3e0VAvI05KvFR.png" alt="Site Name" />
+                        </a>
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <div class="single-nav-right">
+
+                        <div class="single-right">
+                            <div class="color-switcher">
+                                <i icon-name="moon" class="dark-icon" data-mode="dark"></i>
+                                <i icon-name="sun" class="light-icon" data-mode="light"></i>
+                            </div>
+                        </div>
+
+
+                        <?php echo $_SESSION['noticeDropDown']; ?>
+
+
+                        <div class="single-right">
+                            <select name="language" id="" class="site-nice-select"
+                                onchange="window.location.href=this.options[this.selectedIndex].value;">
+                                <option value="../language-update?name=en" selected>English</option>
+                                <option value="../language-update?name=es">Spanish</option>
+                                <option value="../language-update?name=fr">Franch</option>
+                            </select>
+                        </div>
+                       
+                        <div class="single-right">
+                            <button type="button" class="item" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="anticon anticon-user"></i>
+                            </button>
+                            <?php echo $navMini; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/Header-->
+
+        <div class="desktop-screen-show">
+            <div class="side-nav ">
+                <div class="side-wallet-box default-wallet mb-0">
+                    <?php echo $balanceHolder; ?>
+                </div>
+                <div class="side-nav-inside">
+                    <?php echo $navMenu; ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-container">
+            <div class="main-content">
+                <div class="section-gap">
+                    <div class="container-fluid">
+
+                        <div class="row desktop-screen-show">
+                            <div class="col">
+                               <?php echo $_SESSION['kycAlert']; ?>
+                            </div>
+                        </div>
+                        <div class="row mobile-screen-show">
+                            <div class="col-12">
+                               <?php echo $_SESSION['kycAlertMobile']; ?>
+                            </div>
+                        </div>
+                        <!--Page Content-->
+                        <div class="row d-none">
+                            <div class="col-12">
+                                <!-- Transactions -->
+                                <div class="all-feature-mobile mobile-transactions mb-3">
+                                    <div class="title">All Transactions</div>
+                                    <div class="mobile-transaction-filter">
+                                        <div class="filter">
+                                            <form action="" method="get">
+                                                <div class="search">
+
+                                                    <input type="text" placeholder="Search" value="" name="query" />
+                                                    <input type="date" name="date" value="" />
+                                                    <button type="submit" class="apply-btn"><i
+                                                            icon-name="search"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="contents">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Top Section - Visible on Desktop -->
+                            <div class="col-xl-12 d-none d-xl-block">
+                                <div class="site-card">
+                                    <div class="site-card-header">
+                                        <h3 class="title">All Transactions</h3>
+                                    </div>
+                                    <div class="site-card-body">
+                                        <div class="site-table">
+                                            <div class="table-filter">
+                                                <div class="filter">
+                                                    <form action="" method="get">
+                                                        <div class="search">
+                                                            <input type="text" id="search" placeholder="Search" value=""
+                                                                name="query">
+                                                            <input type="date" name="date" value="">
+                                                            <button type="submit" class="apply-btn">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    data-lucide="search" icon-name="search"
+                                                                    class="lucide lucide-search">
+                                                                    <circle cx="11" cy="11" r="8"></circle>
+                                                                    <path d="m21 21-4.3-4.3"></path>
+                                                                </svg>Search
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Description</th>
+                                                            <th>Transactions ID</th>
+                                                            <th>Type</th>
+                                                            <th>Amount</th>
+                                                            <th>Fee</th>
+                                                            <th>Status</th>
+                                                            <th>Method</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <?php echo $_SESSION['desktopTrans']; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Section - Visible on Mobile -->
+                            <div class="col-12 d-block d-xl-none"> <!-- Show only on mobile -->
+                                <!-- Transactions -->
+                                <div class="all-feature-mobile mobile-transactions mb-3">
+                                    <div class="title">All Transactions</div>
+                                    <div class="mobile-transaction-filter">
+                                        <div class="filter">
+                                            <form action=""
+                                                method="get">
+                                                <div class="search">
+                                                    <input type="text" placeholder="Search" value="" name="query">
+                                                    <input type="date" name="date" value="">
+                                                    <button type="submit" class="apply-btn">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" data-lucide="search"
+                                                            icon-name="search" class="lucide lucide-search">
+                                                            <circle cx="11" cy="11" r="8"></circle>
+                                                            <path d="m21 21-4.3-4.3"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="contents" id="mobile-table">
+
+
+                                        <?php echo $_SESSION['mobileTrans']; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Page Content-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Show in 575px in Mobile Screen -->
+        <div class="mobile-screen-show">
+            <?php echo $navMobile; ?>
+        </div>
+        <!-- Show in 575px in Mobile Screen End -->
+
+        <!-- Automatic Popup -->
+
+        <!-- /Automatic Popup End -->
+    </div>
+    <!--/Full Layout-->
+
+    <script src="../assets/global/js/jquery.min.js"></script>
+    <script src="../assets/global/js/jquery-migrate.js"></script>
+
+    <script src="../assets/frontend/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/frontend/js/scrollUp.min.js"></script>
+
+    <script src="../assets/frontend/js/owl.carousel.min.js"></script>
+    <script src="../assets/global/js/waypoints.min.js"></script>
+    <script src="../assets/frontend/js/jquery.counterup.min.js"></script>
+    <script src="../assets/global/js/jquery.nice-select.min.js"></script>
+    <script src="../assets/global/js/lucide.min.js"></script>
+    <script src="../assets/frontend/js/magnific-popup.min.js"></script>
+    <script src="../assets/frontend/js/aos.js"></script>
+    <script src="../assets/global/js/datatables.min.js" type="text/javascript" charset="utf8"></script>
+    <script src="../assets/global/js/simple-notify.min.js"></script>
+    <script src="../assets/frontend/js/main.js?var=5"></script>
+    <script src="../assets/frontend/js/cookie.js"></script>
+    <script src="../assets/global/js/custom.js?var=5"></script>
+    <script src="../assets/global/js/pusher.min.js"></script>
+    <script>
+            (function ($) {
+                'use strict';
+
+                let pusherAppKey = "";
+                let pusherAppCluster = "mt1";
+                let soundUrl = "../notification-tune";
+
+                var notification = new Pusher(pusherAppKey, {
+                    encrypted: true,
+                    cluster: pusherAppCluster,
+                });
+                var channel = notification.subscribe('user-notification109');
+                channel.bind('notification-event', function (result) {
+                    playSound();
+                    latestNotification();
+                    notifyToast(result);
+                });
+
+                function latestNotification() {
+                    $.get('../user/latest-notification', function (data) {
+                        $('.user-notifications109').html(data);
+                    })
+                }
+
+                function notifyToast(data) {
+                    new Notify({
+                        status: 'info',
+                        title: data.data.title,
+                        text: data.data.notice,
+                        effect: 'slide',
+                        speed: 300,
+                        customClass: '',
+                        customIcon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-megaphone"><path d="m3 11 18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg>',
+                        showIcon: true,
+                        showCloseButton: true,
+                        autoclose: true,
+                        autotimeout: 9000,
+                        gap: 20,
+                        distance: 20,
+                        type: 1,
+                        position: 'right bottom',
+                        customWrapper: '<div><a href="' + data.data.action_url + '" class="learn-more-link">Explore<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="external-link" class="lucide lucide-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" x2="21" y1="14" y2="3"></line></svg></a></div>',
+                    })
+
+                }
+
+                function playSound() {
+                    $.get(soundUrl, function (data) {
+                        var audio = new Audio(data);
+                        audio.play();
+                        audio.muted = false;
+                    });
+                }
+
+
+
+            })(jQuery);
+    </script>
+    <script>
+        (function ($) {
+            'use strict';
+            // To top
+            $.scrollUp({
+                scrollText: '<i class="fas fa-caret-up"></i>',
+                easingType: 'linear',
+                scrollSpeed: 500,
+                animation: 'fade'
+            });
+        })(jQuery);
+    </script>
+
+    <script type="text/javascript" src="../assets/vendor/mckenziearts/laravel-notify/js/notify.js"></script>
+    <script>
+        // Color Switcher
+        $(".color-switcher").on('click', function () {
+            "use strict"
+            $("body").toggleClass("dark-theme");
+            var url = '../theme-mode';
+            $.get(url)
+        });
+
+        const spinnerHTML = `
+          <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+            <div class="spinner-border text-light" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        `;
+        $(document).ready(function () {
+            $('form').submit(function (event) {
+                event.preventDefault();
+                var form = $(this);
+                // Show loader
+                var innerHTML = $('.table-responsive').html();
+                var innerHTMLMobile = $('#mobile-table').html();
+                $('.table-responsive').html(spinnerHTML);
+                $('#mobile-table').html(spinnerHTML);
+
+                // Simulate delay of 3 seconds (3000 milliseconds)
+                setTimeout(function () {
+                    // Serialize form data
+                    var formData = form.serialize();
+                    console.log("Serialized Form Data:", formData);
+
+                    // Perform AJAX request
+                    $.ajax({
+                        type: 'GET',
+                        url: endpoint,
+                        data: formData,
+                        dataType: "json",
+                        //dataType: 'html',
+                        success: function (response) {
+                            $('.table-responsive').html(innerHTML);
+                            $('.table-responsive table tbody').html(response.desktopTrans);
+                            $('#mobile-table').html(response.mobileTrans);
+                        },
+                        error: function () {
+                            $('.table-responsive').html('<div class="d-flex justify-content-center align-items-center" style="min-height: 200px;"><p>Error occurred while fetching data.</p></div>');
+                        }
+                    });
+                }, 3000); // 3 second delay
+            });
+        });
+
+    </script>
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<?php include_once '../vendor/php/view.php'; ?>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account -
+    <?php echo WEBSITE_NAME; ?>
+  </title>
+  <link type="image/x-icon" href="static/web/images/logo/coinxxe-icon.png" rel="icon">
+  <link rel="stylesheet" type="text/css" href="static/auth/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="static/auth/css/fontawesome-all.min.css">
+  <link rel="stylesheet" type="text/css" href="static/auth/css/iofrm-style.css">
+  <link rel="stylesheet" type="text/css" href="static/auth/css/iofrm-theme6.css">
+  <!-- Include Toastr CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+  <!--<script src="//code.tidio.co/egmtbtuo6oaube5e9mietcm1pap5uovs.js" async></script>-->
+</head>
+
+<body>
+  <div class="form-body">
+    <div class="website-logo" style="top: 0px;left: 40px;">
+      <a href="index.html">
+        <div class="">
+          <img class="logo-size" src="static/web/images/logo/coinmaxe.png" style="width:200">
+        </div>
+      </a>
+    </div>
+    <div class="row">
+      <div class="img-holder">
+        <div class="bg"></div>
+        <div class="info-holder">
+          <img src="static/auth/images/graphic2.svg" alt="">
+        </div>
+      </div>
+      <div class="form-holder">
+        <div class="form-content" style="background-image:url(static/web/images/wave.png);background-attachment:fixed">
+          <div class="form-items">
+            <h3>Invest your Crypto with Velocity.</h3>
+            <p>
+              Access your all-in-one investment account here.
+            </p>
+            <div class="page-links">
+              <a href="register.html">REGISTER</a>
+              <a href="login.html" class="active">LOGIN</a>
+            </div>
+            <form method="POST" id="loginForm" class="mt-4">
+             <input type="text" name="lemail" id="lemail" placeholder="Email *"
+                class="form-control form-control-lg"
+                style="background:#1CC5C8;color:#fff;font-weight:600;padding:22px 15px" maxlength="225"
+                required>
+              <i id="pass1-hidden" class="fa fa-eye-slash my-form-icon"></i>
+              <i id="pass1-visible" style="display: none;" class="fa fa-eye my-form-icon"></i>
+              <input type="password" id="password1" name="lpassword" placeholder="Password *"
+                class="form-control form-control-lg"
+                style="background:#1CC5C8;color:#fff;font-weight:600;padding:22px 15px"
+                required>
+              <div class="form-button">
+                <button id="submit" type="submit" class="ibtn">LOGIN</button>
+                <a href="forgot-password.html">Forgot Password?</a>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="static/auth/js/jquery.min.js"></script>
+  <!-- Include Toastr JS -->
+  <script src="static/auth/js/toastr.min.js"></script>
+  <script src="static/auth/js/popper.min.js"></script>
+  <script src="static/auth/js/bootstrap.min.js"></script>
+  <script src="static/auth/js/django-validate.js"></script>
+  <script src="static/auth/js/main.js"></script>
+   <script>
+    $(document).ready(function () {
+      $('#loginForm').submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Validate form inputs
+        var email = $('#lemail').val();
+        var password = $('#password1').val();
+
+        if (!email.trim()) {
+          toastr.error('Please enter your email.');
+          return;
+        }
+
+        if (!password.trim()) {
+          toastr.error('Please enter your password.');
+          return;
+        }
+
+        // Perform AJAX login request
+        $.ajax({
+          url: postUrl, // Replace with your PHP login script URL
+          method: 'POST',
+          data: $(this).serialize(),
+          success: function (response) {
+            if (response.message === 'success') {
+              toastr.success('Login successful.');
+              setTimeout(function(){
+
+                window.location.href = '../user/dashboard.html'; // Redirect to dashboard after successful login
+              },3000);
+            } else {
+              toastr.error('Invalid email or password.');
+            }
+          },
+          error: function () {
+            toastr.error('Error occurred, please try again.');
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+
+
+
+</html>
